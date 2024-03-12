@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gradesheet Calculator</title>
+	<!--bootstrap CSS stlesheet-->
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+	<style type="text/css">
+		div{
+			border: 0px solid black;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1 class="text-center">Grade Calculator</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md" >
+				<div class=" table-responsive-md mt-4">
+					<table class="table  table-striped">
+						<thead>
+	  					<tr>
+	  						<th>Subject</th>
+	  						<th>Score</th>
+	  						<th>Grade</th>
+	  					</tr>
+	  					</thead>
+	  					<tbody>
+	  					<tr> <td>ENGLISH</td>
+	  						<td><input type="number" name="english" id="english" max="100" min="0" onchange="gradeLetter('english')" ></td>
+	  						<td><input type="text" name="englishgrade" id="englishgrade"></td>
+	  					</tr>
+	  					<tr> <td>MATHEMATICS</td>
+	  						<td><input type="number" id="maths" max="100" min="0" onchange="gradeLetter('maths')"></td>
+	  						<td><input type="text" id="mathsgrade"></td>
+	  					</tr>
+	  					<tr> <td>CHEMISTRY</td>
+	  						<td><input type="number" id="chem" max="100" min="0" onchange="gradeLetter('chem')"></td>
+	  						<td><input type="text" id="chemgrade"></td>
+	  					</tr>
+	  					<tr> <td>BIOLOGY</td>
+	  						<td><input type="number" id="bio" max="100" min="0" onchange="gradeLetter('bio')"></td>
+	  						<td><input type="text" id="biograde"></td>
+	  					</tr>
+	  					<tr> <td>FRENCH</td>
+	  						<td><input type="number" id="french" max="100" min="0" onchange="gradeLetter('french')"></td>
+	  						<td><input type="text" id="frenchgrade"></td>
+	  					</tr>
+	  					</tbody>
+	                </table>
+	            </div>
+                <div>
+        			<button class="btn btn-success" onclick="totalScore()">GET RESULT</button>
+                </div>
+			</div>	
+		</div>
+		<div class="row">
+			<div class="col-md-2 mt-4">
+					<div><h3 class="text-center">Total</h3> </div> 
+			</div>
+			<div class="col-md-3 mt-4 my-3">
+					<div> <h4 class="text-center px-5 pt-1" id="addedtotal">0</h4></div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-2 m-auto">
+					<div><h3 class="text-center">Remarks</h3> </div> 
+			</div>
+			<div class="col-md-4 m-auto">
+					<div> <h4 class="" id="statement">Welcome!</h4></div>
+			</div>
+			<div class="col-md-4 m-auto">
+					<div><img src="images/goodluck.png" class="img-fluid" id="luck"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2 mt-2">
+					<div><h3 class="text-center">Average</h3> </div> 
+			</div>
+			<div class="col-md-3 mt-3 ">
+					<div> <h4 class="text-center" id="averagescore">0</h4></div>
+			</div>
+		</div>
+			
+	</div>
+	
+	<script type="text/javascript">
+		
+		function gradeLetter(field) {
+			var grade =document.getElementById(field).value;
+			if (grade > 100 || grade < 0){
+				document.getElementById(field + 'grade').value = "Invalid grade"
+			}
+			else if(grade < 40){
+				document.getElementById(field + 'grade').value = 'F'
+			}else if(grade >= 40 && grade <= 45)
+		{
+			document.getElementById(field + 'grade').value = 'E'
+		}else if(grade > 45 && grade < 50 ){
+			document.getElementById(field + 'grade').value='D'
+		}else if(grade >= 50 && grade < 60){
+			document.getElementById(field + 'grade').value = 'C'
+		}else if(grade >= 60 && grade <= 69){
+			document.getElementById(field + 'grade').value = 'B'
+		}else{
+			document.getElementById(field + 'grade').value = 'A'
+		}
+	}
+	
+	function totalScore(){
+		var a = Number(document.getElementById('english').value);
+		var b = Number(document.getElementById('maths').value);
+		var c = Number(document.getElementById('chem').value);
+		var d = Number(document.getElementById('bio').value);
+		var e = Number(document.getElementById('french').value);
+
+
+		var total = a+b+c+d+e;
+		document.getElementById('addedtotal').innerHTML=total;
+
+		var average = total / 5;
+		document.getElementById('averagescore').innerHTML= average;
+
+		
+		if( average >= 50){
+			document.getElementById('statement').innerHTML='Conglatulations, You Passed'
+			document.getElementById('luck').src='images/proud.png'
+
+		}else{
+			document.getElementById('statement').innerHTML="I'm Sorry, You Failed"
+			document.getElementById('luck').src='images/sadface.png'
+		}
+
+	}
+			
+
+
+	</script>
+</body>
+</html>
